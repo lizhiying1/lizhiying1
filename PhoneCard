@@ -1,0 +1,78 @@
+#include <stdlib.h>
+#include<iostream>
+#include<string>
+//#include "stdafx.h"
+using namespace std;
+
+class PhoneCard
+{
+public:
+	long connectnumber;
+	double additoryFee;
+	long cardNumber;
+	int password;
+	bool connected;
+	double balance;
+	void performConnect(long cn ,int pw);
+	double getBalance();
+	void performDial();
+};
+
+
+class Card_201:public PhoneCard
+{ 
+public:
+	Card_201(long cn,int pw,double ad,int ba)
+	{
+		connectnumber=cn;
+		password=pw;
+		additoryFee=ad;
+		balance=ba;
+		 }
+	
+	void performConnect(long cn ,int pw){
+	  if(cn!=connectnumber||pw!=password)
+		 {   connected=false;
+			 cout<<"don't exit"<<endl;}
+		 else{
+			 connected=true;
+			 cout<<"exit"<<endl;}}
+	
+	double getBalance()
+		 {    
+		if(connected==true);
+	    return balance;
+		}
+	
+	void performDial() 
+	{   		
+		if(connected)
+		{
+		    balance -=additoryFee*0.3;
+			cout<<"current is "<<getBalance()<<endl;
+	                 }
+			else {
+				cout<<"fail"<<endl;
+				
+			}
+		}
+	};
+   
+ int main(){
+	 int cn;
+	int pw;
+	 Card_201 card(12345,5678,10,300);
+	 	cout<<"input the cardnumber:"<<endl;
+	cin>>cn;
+	cout<<"input the pasword"<<endl;
+	cin>>pw;
+
+	card.performConnect(cn,pw);
+	for(int i = 1;i<9;i++){
+	    cout<<"第"<<i<<"次拨号"<<endl;
+		card.performDial();
+	}
+
+	system("pause");
+	return 0;
+ }
