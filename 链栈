@@ -1,0 +1,80 @@
+//链式栈
+#include<iostream>
+using namespace std;
+class node{
+public:
+ int data;
+ node *next;
+ node(){next=NULL;}
+ node(int data1,node *next1)
+ {
+  data=data1;
+  next=next1;
+ }
+ ~node(){}
+};
+class linkstack{
+private:
+ node *top;
+public:
+ linkstack(){top=NULL;}
+ ~linkstack(){}
+ int length();
+ bool empty(){return top==NULL;}
+ void push(int e);
+ void pop(int &e);
+ void display()();
+};
+int linkstack::length()
+ {
+  int count=0;
+  for(node *temp=top;temp!=NULL;temp=temp->next )
+  {
+   count++;
+  }
+  return count;
+ }
+void linkstack::push(int e)
+ { node *temp=new node(e,top);
+  top=temp;
+  }
+void linkstack::pop(int &e)   
+{ if (!empty())
+ {node *temp=top;
+ top=top->next;
+ e=temp->data;
+ delete temp;
+}
+}
+void linkstack::display()()
+{
+ for(node *temp=top;temp!=NULL;temp=temp->next )
+ {
+  cout<<temp->data <<"  ";
+ }
+ cout<<endl;
+}
+int main()
+{ int i,x,e;
+ linkstack a;
+ cout<<"输入要建立栈的长度："<<endl;
+ cin>>x;
+ for(i=1;i<=x;i++)
+ {cout<<"请输入要入栈的"<<i<<"个数据:"<<endl;
+ cin>>e;
+ a.push (e);
+ }
+ cout<<"显示队栈中的元素为："<<endl;
+ a.display() ();
+ cout<<"输入出栈元素个数:";
+ cin>>x;
+    cout<<"出栈元素为：";
+ for(i=1;i<=x;i++)
+ {a.pop (e);
+  cout<<e<<"  ";
+ }
+ cout<<endl;
+    cout<<"显示栈中的剩余元素为："<<endl;
+ a.display ();
+ return 0;
+}
